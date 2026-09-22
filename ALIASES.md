@@ -18,7 +18,7 @@
 
 | `git br` | `git branch` | Список веток, создание, удаление |
 
-| `git df` | `git diff` | Различия между рабочей папкой и staging |
+| `git df` | `git diff --stat` | Различия между рабочей папкой и staging |
 
 | `git lg` | `git log --oneline --decorate --all --graph` | Граф всей истории |
 
