@@ -18,6 +18,13 @@ pipeline {
                 bat 'python -m pytest test_utils.py -v'
             }
         }
+        stage('Generate Docs') {
+            steps {
+                bat 'if not exist docs mkdir docs'
+                bat 'copy README.md docs\\index.md'
+                echo 'Documentation generated in docs/index.md'
+            }
+        }
     }
 
     post {
