@@ -1,5 +1,5 @@
 import pytest
-from utils import add, sub, div, pow, mod, floor_div
+from utils import add, sub, div, pow, mod, floor_div, mul
 
 def test_add():
     assert add(2, 3) == 5
@@ -22,3 +22,6 @@ def test_mod():
 
 def test_floor_div():
     assert floor_div(10, 3) == 3
+
+def test_mul():
+    assert mul(3, 4) == 12
