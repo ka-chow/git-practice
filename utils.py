@@ -76,3 +76,12 @@ def floor_div(a, b):
     :return: Целая часть от деления a на b.
     """
     return a // b
+
+def square(a):
+    """
+    Возведение числа в квадрат.
+
+    :param a: Число.
+    :return: Квадрат числа a.
+    """
+    return a * a
