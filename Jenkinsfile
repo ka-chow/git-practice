@@ -1,10 +1,8 @@
 pipeline {
     agent any
 
-
     triggers {
-        // Регулярное выражение для команды /docs
-        issueCommentTrigger('.*/docs.*') 
+        issueCommentTrigger('.*/docs.*')
     }
 
     stages {
@@ -24,27 +22,17 @@ pipeline {
                 bat 'python -m pytest test_utils.py -v'
             }
         }
-        stage('Generate Docs') {
+        stage('Generate pydoc HTML') {
             steps {
-                bat 'if not exist docs mkdir docs'
-                bat 'copy README.md docs\\index.md'
-                echo 'Documentation generated in docs/index.md'
-            }
-        }
-        stage('Generate Doxygen HTML') {
-            when {
-                triggeredBy 'GitHubPullRequestCommentCause'
-            }
-            steps {
-                echo 'Generating HTML documentation with Doxygen...'
-                bat 'doxygen Doxyfile'
+                echo 'Generating HTML documentation with pydoc...'
+                bat 'python -m pydoc -w utils'
                 publishHTML(target: [
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
-                    reportDir: 'docs/html',
-                    reportFiles: 'index.html',
-                    reportName: 'Doxygen HTML Report'
+                    reportDir: '.',
+                    reportFiles: 'utils.html',
+                    reportName: 'pydoc HTML Report'
                 ])
             }
         }
