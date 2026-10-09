@@ -1,6 +1,12 @@
 pipeline {
     agent any
 
+
+    triggers {
+        // Регулярное выражение для команды /docs
+        issueCommentTrigger('.*/docs.*') 
+    }
+
     stages {
         stage('Checkout') {
             steps {
