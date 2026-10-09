@@ -25,6 +25,23 @@ pipeline {
                 echo 'Documentation generated in docs/index.md'
             }
         }
+        stage('Generate Doxygen HTML') {
+            when {
+                triggeredBy 'GitHubPullRequestCommentCause'
+            }
+            steps {
+                echo 'Generating HTML documentation with Doxygen...'
+                bat 'doxygen Doxyfile'
+                publishHTML(target: [
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'docs/html',
+                    reportFiles: 'index.html',
+                    reportName: 'Doxygen HTML Report'
+                ])
+            }
+        }
     }
 
     post {
